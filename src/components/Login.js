@@ -1,6 +1,6 @@
 import './login.css';
 import profile from "./a.png"
-import password_img from "./password.png"
+import password_img from "./reset-password.png"
 import email_img from "./email.png"
 
 
