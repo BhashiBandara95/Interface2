@@ -4,17 +4,10 @@ import profile from "./a.png"
 import password_img from "./reset-password.png"
 import email_img from "./email.png"
 import {Link} from "react-router-dom"
-
-import { useState } from 'react';
 import Navbar from './Navbar';
-function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
 
-  const submit = (e) => {
-    e.preventDefault()
-    console.log({ email, password });
-  }
+export default function Login({loginHander,setEmail,setPassword}) {
+
 
   return (
     <>
@@ -34,14 +27,14 @@ function Login() {
               <h1>Login Page</h1>
               <div>
                 <img src={email_img} alt="email" className="email" />
-                <input type="text" placeholder="user name" className="name" value={email} onChange={(e) => { setEmail(e.target.value) }} />
+                <input type="text" placeholder="user name" className="name"  onChange={(e) => { setEmail(e.target.value) }} required/>
               </div>
               <div className="second-input">
                 <img src={password_img} alt="pass" className="email" />
-                <input type="password" placeholder="password" className="name" value={password} onChange={(e) => { setPassword(e.target.value) }} />
+                <input type="password" placeholder="password" className="name"  onChange={(e) => { setPassword(e.target.value) }} required/>
               </div>
               <div className="login-button">
-                <button onClick={submit}>Login</button>
+                <button onClick={loginHander}>Login</button>
               </div>
 
               <p className="link">
@@ -58,5 +51,3 @@ function Login() {
     </>
   );
 }
-
-export default Login;

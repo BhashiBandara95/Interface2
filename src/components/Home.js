@@ -7,7 +7,7 @@ export default function Home() {
   useEffect(()=>{
     const token = Cookies.get('jwt')
     jwt.verify(token,'jwtsecret',(err,token)=>{
-      if (err) console.log(err);
+      if (err) window.location.href = '/login'
       console.log(token);
     })
   },[])

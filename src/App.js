@@ -6,9 +6,12 @@ import CryptoJS from "crypto-js";
 import jwt from "jsonwebtoken";
 import Cookies from 'js-cookie'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { useState } from 'react';
 
 export default function App() {
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const signUpHandler = event => {
     event.preventDefault()
@@ -37,11 +40,19 @@ export default function App() {
     })
   }
 
+  const loginHander = () => {
+    fetch(`https://data.mongodb-api.com/app/born-yahdr/endpoint/grp2/readbyemail?email=${email}`)
+      .then(res=>res.json())
+      .then(data=>{
+        if (data === null) console.log('Null');
+      })
+  }
+
   return (
     <BrowserRouter>
       <Routes>
           <Route index element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login loginHander={loginHander} setEmail={setEmail} setPassword={setPassword} />} />
           <Route path="/signup" element={<Signup signUpHandler={signUpHandler}/>} />
       </Routes>
     </BrowserRouter>
