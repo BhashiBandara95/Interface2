@@ -2,6 +2,7 @@ import React from 'react';
 import Home from "./components/Home"
 import Login from "./components/Login";
 import Signup from "./components/Singup";
+import Logout from './Logout';
 import CryptoJS from "crypto-js";
 import jwt from "jsonwebtoken";
 import Cookies from 'js-cookie'
@@ -34,6 +35,7 @@ export default function App() {
     .then(data=>{
       const token = jwt.sign(data,'jwtsecret',{expiresIn:3600})
       Cookies.set('jwt',token)
+      window.location.href = '/'
     })
     .catch(err=>{
       console.log(err);
@@ -44,9 +46,19 @@ export default function App() {
     fetch(`https://data.mongodb-api.com/app/born-yahdr/endpoint/grp2/readbyemail?email=${email}`)
       .then(res=>res.json())
       .then(data=>{
-        if (data === null) console.log('Null');
+        if (data !== null) {
+          var bytes  = CryptoJS.AES.decrypt(data['password'], 'secret');
+          var originalText = bytes.toString(CryptoJS.enc.Utf8);
+          if (originalText === password) {
+            const token = jwt.sign({id:data._id},'jwtsecret',{expiresIn:3600})
+            Cookies.set('jwt',token)
+            window.location.href = '/'
+          }
+        }
+
       })
   }
+
 
   return (
     <BrowserRouter>
@@ -54,6 +66,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="/login" element={<Login loginHander={loginHander} setEmail={setEmail} setPassword={setPassword} />} />
           <Route path="/signup" element={<Signup signUpHandler={signUpHandler}/>} />
+          <Route path="/logout" element={<Logout />} />
       </Routes>
     </BrowserRouter>
   )
