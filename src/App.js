@@ -2,7 +2,8 @@ import React from 'react';
 import Home from "./components/Home"
 import Login from "./components/Login";
 import Signup from "./components/Singup";
-import Logout from './Logout';
+import Logout from './components/Logout';
+import Profile from "./components/Profile";
 import CryptoJS from "crypto-js";
 import jwt from "jsonwebtoken";
 import Cookies from 'js-cookie'
@@ -67,6 +68,7 @@ export default function App() {
           <Route path="/login" element={<Login loginHander={loginHander} setEmail={setEmail} setPassword={setPassword} />} />
           <Route path="/signup" element={<Signup signUpHandler={signUpHandler}/>} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   )

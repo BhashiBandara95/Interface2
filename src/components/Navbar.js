@@ -19,6 +19,7 @@ export default function Navbar(){
     return (
         <div className="navbar">
             <span className="active" ><Link to="/">Home</Link></span>
+            {auth && <span><Link to="/profile">Profile</Link></span>}
             {auth && <span><Link to="/logout">Logout</Link></span>}
             {!auth && <span><Link to="/signup">Signup</Link></span>}
             {!auth && <span><Link to="/login">Login</Link></span>}
