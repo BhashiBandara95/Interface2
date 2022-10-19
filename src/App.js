@@ -1,7 +1,7 @@
 
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
-import Signup from "./components/Signup";
+import Signup from "./components/Singup";
 
 import {useState} from "react"
 

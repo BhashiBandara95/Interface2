@@ -7,9 +7,6 @@ import contact from "./contact.png"
 import email from "./email.png"
 import password from "./reset-password.png"
 
-
-
-
 export default function Signup() {
 
   const myFn = async(event)=>{
