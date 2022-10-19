@@ -1,3 +1,4 @@
+import React from 'react';
 import './login.css';
 import profile from "./a.png"
 import user from "./user.png"
@@ -6,34 +7,15 @@ import post from "./post.png"
 import contact from "./contact.png"
 import email from "./email.png"
 import password from "./reset-password.png"
+import Navbar from './Navbar';
+import {Link} from "react-router-dom"
 
-
-
-
-export default function Signup() {
-
-  const myFn = async(event)=>{
-    event.preventDefault()
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    // console.log(JSON.parse);
-    const res = await fetch('https://ap-southeast-1.aws.data.mongodb-api.com/app/application-0-anjli/endpoint/client/add',{
-      method:"POST",
-      headers:{
-        'Content-Type':"application/json"
-      },
-      body:JSON.stringify(data)
-    })
-    if (res.status === 200) {
-     
-    }
-    else {
-      
-    }
-  }
+export default function Signup({signUpHandler}) {
 
   return (
-    <form className="main" onSubmit={myFn}>
+    <>
+      <Navbar />
+      <form className="main" onSubmit={signUpHandler}>
          <div className="sub-main">
        <div>
          <div className="imgs">
@@ -45,19 +27,19 @@ export default function Signup() {
            <h1>Signup Page</h1>
            <div>
            <img src={user} alt="user" className="email"/>
-             <input type="text" placeholder="user name" className="name" name='user'/>
+             <input type="text" placeholder="user name" className="name" name='name'/>
            </div>
            <div >
            <img src={nic} alt="nic" className="email"/>
-             <input type="text" placeholder="user NIC" className="name" name='nic' />
+             <input type="text" placeholder="user NIC" className="name" name='ssn' />
            </div> 
            <div >
            <img src={post} alt="post" className="email"/>
-             <input type="text" placeholder="user post" className="name" name='post'/>
+             <input type="text" placeholder="user post" className="name" name='job'/>
            </div>
            <div >
            <img src={contact} alt="contact" className="email"/>
-             <input type="text" placeholder="user contact" className="name" name='contact'/>
+             <input type="text" placeholder="user contact" className="name" name='phone_number'/>
            </div>
            <div >
            <img src={email} alt="email" className="email"/>
@@ -72,7 +54,7 @@ export default function Signup() {
           </div>
            
             <p className="link">
-              <a href="/">Forgot password ?</a> Or<a href="/">Sign Up</a>
+              <Link to="/">Forgot password ?</Link> Or<Link to="/login">Login</Link>
             </p>
            
  
@@ -82,5 +64,6 @@ export default function Signup() {
 
      </div>
     </form>
+    </>
   )
 }
